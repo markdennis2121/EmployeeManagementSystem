@@ -1,0 +1,21 @@
+@model EmployeeManagementMvc.Models.Employee
+
+@{
+    ViewData["Title"] = "Edit Employee";
+}
+
+<div class="form-shell">
+    <div class="mb-4"><div class="eyebrow">People directory · ID #@Model.Id</div><h1 class="page-title">Edit employee</h1><p class="page-description">Update the details for @Model.Name.</p></div>
+    <section class="surface-card form-card">
+        <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="ModelOnly" class="validation-summary-errors mb-4"></div>
+            <div class="mb-4"><label asp-for="Name" class="form-label"></label><input asp-for="Name" class="form-control" autocomplete="name" /><span asp-validation-for="Name" class="text-danger small"></span></div>
+            <div class="mb-4"><label asp-for="Email" class="form-label"></label><input asp-for="Email" class="form-control" autocomplete="email" /><span asp-validation-for="Email" class="text-danger small"></span></div>
+            <div class="mb-4"><label asp-for="Salary" class="form-label"></label><input asp-for="Salary" type="number" step="0.01" class="form-control" /><span asp-validation-for="Salary" class="text-danger small"></span></div>
+            <div class="d-flex flex-column flex-sm-row gap-2 border-top pt-4"><button type="submit" class="btn btn-primary">Save changes</button><a asp-action="Index" class="btn btn-light border">Cancel</a></div>
+        </form>
+    </section>
+</div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

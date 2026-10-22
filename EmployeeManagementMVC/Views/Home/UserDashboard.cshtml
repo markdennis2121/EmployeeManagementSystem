@@ -1,0 +1,32 @@
+@{
+    ViewData["Title"] = "User Dashboard";
+}
+
+<div class="page-header">
+    <div>
+        <div class="eyebrow">My workspace</div>
+        <h1 class="page-title">Welcome, @User.Identity?.Name</h1>
+        <p class="page-description">Find the employee information you need from your workspace.</p>
+    </div>
+    <a asp-controller="Employee" asp-action="Index" class="btn btn-primary">View directory</a>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="surface-card metric-card"><div class="metric-icon">◎</div><div><div class="metric-label">Access</div><div class="metric-value">Team member</div></div></div>
+    </div>
+    <div class="col-md-4">
+        <div class="surface-card metric-card"><div class="metric-icon">▤</div><div><div class="metric-label">Resource</div><div class="metric-value">Employee directory</div></div></div>
+    </div>
+    <div class="col-md-4">
+        <div class="surface-card metric-card"><div class="metric-icon">✓</div><div><div class="metric-label">Account</div><div class="metric-value">Active</div></div></div>
+    </div>
+</div>
+
+<section class="surface-card p-4">
+    <div class="d-flex justify-content-between align-items-start mb-4">
+        <div><h2 class="section-heading mb-1">Get started</h2><p class="section-muted mb-0">Useful resources for your workday</p></div>
+        <span class="status-badge">Active account</span>
+    </div>
+    <a class="quick-action" asp-controller="Employee" asp-action="Index"><span class="quick-action-icon">◎</span><span><strong class="d-block">Browse employee directory</strong><small class="section-muted">View the latest employee contact information</small></span><span class="ms-auto">→</span></a>
+</section>

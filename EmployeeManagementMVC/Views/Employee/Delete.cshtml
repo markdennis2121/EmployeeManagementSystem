@@ -1,0 +1,18 @@
+@model EmployeeManagementMvc.Models.Employee
+
+@{
+    ViewData["Title"] = "Delete Employee";
+}
+
+<div class="form-shell">
+    <div class="mb-4"><div class="eyebrow">People directory · ID #@Model.Id</div><h1 class="page-title">Delete employee</h1><p class="page-description">Review this action before permanently removing the record.</p></div>
+    <section class="surface-card form-card">
+        <div class="alert alert-warning border-0 mb-4"><strong>This action cannot be undone.</strong><br /><span class="small">The employee record and its directory details will be permanently deleted.</span></div>
+        <dl class="row mb-4">
+            <dt class="col-sm-4 form-label">Name</dt><dd class="col-sm-8">@Model.Name</dd>
+            <dt class="col-sm-4 form-label">Email</dt><dd class="col-sm-8">@Model.Email</dd>
+            <dt class="col-sm-4 form-label">Annual salary</dt><dd class="col-sm-8">@Model.Salary.ToString("C")</dd>
+        </dl>
+        <form asp-action="Delete" asp-route-id="@Model.Id" method="post"><input type="hidden" asp-for="Id" /><div class="d-flex flex-column flex-sm-row gap-2 border-top pt-4"><button type="submit" class="btn btn-danger">Delete employee</button><a asp-action="Index" class="btn btn-light border">Keep employee</a></div></form>
+    </section>
+</div>

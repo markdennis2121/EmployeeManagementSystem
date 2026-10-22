@@ -1,0 +1,15 @@
+@model ErrorViewModel
+@{
+    ViewData["Title"] = "Something went wrong";
+}
+
+<section class="surface-card error-card">
+    <div class="error-code">500</div>
+    <h1 class="page-title mb-3">Something went wrong</h1>
+    <p class="page-description mb-4">We could not complete your request. Please try again, or return to your dashboard.</p>
+    <a asp-controller="Account" asp-action="Dashboard" class="btn btn-primary">Return to dashboard</a>
+    @if (Model.ShowRequestId)
+    {
+        <p class="section-muted mt-4 mb-0">Reference ID: <code>@Model.RequestId</code></p>
+    }
+</section>

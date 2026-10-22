@@ -1,0 +1,61 @@
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="page-header">
+    <div>
+        <div class="eyebrow">Administration</div>
+        <h1 class="page-title">Good morning, @User.Identity?.Name</h1>
+        <p class="page-description">Manage your workforce and keep employee information up to date.</p>
+    </div>
+    <a asp-controller="Employee" asp-action="Create" class="btn btn-primary">
+        <span class="me-1">+</span> Add employee
+    </a>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="surface-card metric-card">
+            <div class="metric-icon">⌘</div>
+            <div><div class="metric-label">Workspace</div><div class="metric-value">Admin access</div></div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="surface-card metric-card">
+            <div class="metric-icon">◎</div>
+            <div><div class="metric-label">Directory</div><div class="metric-value">Employee records</div></div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="surface-card metric-card">
+            <div class="metric-icon">✓</div>
+            <div><div class="metric-label">Security</div><div class="metric-value">Role protected</div></div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-7">
+        <section class="surface-card p-4 h-100">
+            <div class="d-flex justify-content-between align-items-start mb-4">
+                <div><h2 class="section-heading mb-1">Employee operations</h2><p class="section-muted mb-0">Common administration tasks</p></div>
+                <span class="status-badge">Administrator</span>
+            </div>
+            <div class="d-grid gap-2">
+                <a class="quick-action" asp-controller="Employee" asp-action="Index"><span class="quick-action-icon">◎</span><span><strong class="d-block">Open employee directory</strong><small class="section-muted">Review and manage all employee records</small></span><span class="ms-auto">→</span></a>
+                <a class="quick-action" asp-controller="Employee" asp-action="Create"><span class="quick-action-icon">＋</span><span><strong class="d-block">Add a new employee</strong><small class="section-muted">Create a complete employee profile</small></span><span class="ms-auto">→</span></a>
+            </div>
+        </section>
+    </div>
+    <div class="col-lg-5">
+        <section class="surface-card p-4 h-100">
+            <h2 class="section-heading mb-1">Account overview</h2>
+            <p class="section-muted mb-4">Your current access level</p>
+            <div class="d-flex align-items-center gap-3 border-bottom pb-3 mb-3">
+                <span class="user-avatar bg-primary text-white">@(User.Identity?.Name?.Substring(0, 1).ToUpperInvariant())</span>
+                <div><strong class="d-block">@User.Identity?.Name</strong><small class="section-muted">Administrator account</small></div>
+            </div>
+            <p class="section-muted mb-0">You have full access to employee directory management.</p>
+        </section>
+    </div>
+</div>

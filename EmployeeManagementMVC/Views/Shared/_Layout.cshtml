@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#102a43" />
+    <title>@ViewData["Title"] · Employee Management</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EmployeeManagementMvc.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="app-header">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container app-container">
+                <a class="navbar-brand d-flex align-items-center gap-2" asp-controller="Home" asp-action="Index">
+                    <span class="brand-mark">EM</span>
+                    <span>
+                        <strong class="brand-name">Employee</strong>
+                        <small class="brand-subtitle d-block">Management platform</small>
+                    </span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation"
+                        aria-controls="mainNavigation" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNavigation">
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <ul class="navbar-nav me-auto ms-lg-4 gap-lg-1">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Account" asp-action="Dashboard">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Employee" asp-action="Index">Employees</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                        </ul>
+
+                        <div class="d-flex align-items-center gap-3 mt-3 mt-lg-0">
+                            <div class="user-summary">
+                                <span class="user-avatar">@(User.Identity.Name?.Substring(0, 1).ToUpperInvariant())</span>
+                                <span class="d-none d-sm-inline">
+                                    <strong class="d-block user-name">@User.Identity.Name</strong>
+                                    <small class="user-role">@(User.IsInRole("Admin") ? "Administrator" : "Team member")</small>
+                                </span>
+                            </div>
+                            <form asp-controller="Account" asp-action="Logout" method="post">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-sm btn-outline-light px-3">Sign out</button>
+                            </form>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="ms-auto d-flex align-items-center gap-2 mt-3 mt-lg-0">
+                            <a class="btn btn-link text-white text-decoration-none" asp-controller="Account" asp-action="Login">Sign in</a>
+                            <a class="btn btn-light btn-sm px-3" asp-controller="Account" asp-action="Register">Create account</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="app-main">
+        <div class="container app-container">
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        <div class="container app-container d-flex flex-column flex-md-row justify-content-between gap-2">
+            <span>© 2026 Employee Management Platform</span>
+            <a asp-controller="Home" asp-action="Privacy">Privacy and data protection</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

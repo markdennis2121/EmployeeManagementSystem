@@ -1,0 +1,49 @@
+@model IEnumerable<EmployeeManagementMvc.Models.Employee>
+
+@{
+    var employees = Model.ToList();
+}
+
+<div class="page-header">
+    <div>
+        <div class="eyebrow">People directory</div>
+        <h1 class="page-title">Employees</h1>
+        <p class="page-description">A central view of your organization’s employee records.</p>
+    </div>
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-action="Create" class="btn btn-primary"><span class="me-1">+</span> Add employee</a>
+    }
+</div>
+
+<div class="surface-card table-shell">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 border-bottom p-4">
+        <div><h2 class="section-heading mb-1">Employee directory</h2><p class="section-muted mb-0">@employees.Count record@(employees.Count == 1 ? "" : "s") available</p></div>
+        <span class="status-badge">Up to date</span>
+    </div>
+    @if (employees.Count == 0)
+    {
+        <div class="empty-state"><div class="metric-icon mx-auto mb-3">◎</div><h3 class="section-heading">No employees yet</h3><p class="section-muted mb-3">Add your first employee to begin building the directory.</p>@if (User.IsInRole("Admin")) { <a asp-action="Create" class="btn btn-primary">Add first employee</a> }</div>
+    }
+    else
+    {
+        <table class="table">
+            <thead><tr><th scope="col">Employee</th><th scope="col">Email</th><th scope="col">Salary</th><th scope="col">Status</th>@if (User.IsInRole("Admin")) { <th scope="col" class="text-end">Actions</th> }</tr></thead>
+            <tbody>
+            @foreach (var employee in employees)
+            {
+                <tr>
+                    <td><span class="employee-name d-block">@employee.Name</span><span class="employee-id">ID #@employee.Id</span></td>
+                    <td><a href="mailto:@employee.Email" class="text-decoration-none">@employee.Email</a></td>
+                    <td class="fw-semibold">@employee.Salary.ToString("C")</td>
+                    <td><span class="status-badge">Active</span></td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td class="text-end text-nowrap"><a class="action-link" asp-action="Edit" asp-route-id="@employee.Id">Edit</a><a class="action-link delete" asp-action="Delete" asp-route-id="@employee.Id">Delete</a></td>
+                    }
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+</div>
