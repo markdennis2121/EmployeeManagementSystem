@@ -108,41 +108,6 @@ using (var scope = app.Services.CreateScope())
         {
             await userManager.AddToRoleAsync(admin, "Admin");
         }
-
-        var testUserEmail = "";
-        var testUserPassword = "";
-
-        var testUser = await userManager.FindByEmailAsync(testUserEmail);
-
-        if (testUser == null)
-        {
-            testUser = new IdentityUser
-            {
-                UserName = testUserEmail,
-                Email = testUserEmail,
-                EmailConfirmed = true
-            };
-
-            var result = await userManager.CreateAsync(
-                testUser,
-                testUserPassword
-            );
-
-            if (result.Succeeded)
-            {
-                await userManager.AddToRoleAsync(testUser, "User");
-            }
-            else
-            {
-                throw new Exception(
-                    string.Join("; ", result.Errors.Select(e => e.Description))
-                );
-            }
-        }
-        else if (!await userManager.IsInRoleAsync(testUser, "User"))
-        {
-            await userManager.AddToRoleAsync(testUser, "User");
-        }
     }
 }
 
