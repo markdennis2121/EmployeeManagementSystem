@@ -109,8 +109,8 @@ using (var scope = app.Services.CreateScope())
             await userManager.AddToRoleAsync(admin, "Admin");
         }
 
-        var testUserEmail = "user@example.com";
-        var testUserPassword = "User123456#";
+        var testUserEmail = "";
+        var testUserPassword = "";
 
         var testUser = await userManager.FindByEmailAsync(testUserEmail);
 
